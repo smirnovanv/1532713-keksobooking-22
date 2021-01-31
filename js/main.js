@@ -6,10 +6,10 @@ getRandomInRange(0, 100);
 
 //Источник кода: https://myrusakov.ru/js-random-numbers.html
 
-const getRandomWithComa = function (minNumber, maxNumber, numbersAfterComa) {
-  return ((Math.random() * (maxNumber - minNumber)) + minNumber).toFixed(numbersAfterComa);
+const getRandomWithComma = function (minNumber, maxNumber, numbersAfterComma) {
+  return ((Math.random() * (maxNumber - minNumber)) + minNumber).toFixed(numbersAfterComma);
 }
 
-getRandomWithComa(5, 6, 3);
+getRandomWithComma(5, 6, 3);
 
 //Источник кода: мой код
