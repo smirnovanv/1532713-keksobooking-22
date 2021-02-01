@@ -7,9 +7,9 @@ getRandomInRange(0, 100);
 //Источник кода: https://myrusakov.ru/js-random-numbers.html
 
 const getRandomWithComma = function (minNumber, maxNumber, numbersAfterComma) {
-  return ((Math.random() * (maxNumber - minNumber)) + minNumber).toFixed(numbersAfterComma);
+  return Number(((Math.random() * (maxNumber - minNumber)) + minNumber).toFixed(numbersAfterComma));
 }
 
-getRandomWithComma(5, 6, 3);
+getRandomWithComma(5, 5.005, 3);
 
 //Источник кода: мой код
