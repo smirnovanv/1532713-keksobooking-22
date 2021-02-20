@@ -1,4 +1,8 @@
-import {createSimilarOffers} from './data.js';
 
-createSimilarOffers();
+import './generate-offers-markup.js';
+
+
+
+
+
 
