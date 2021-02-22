@@ -47,5 +47,48 @@ let transferCoordinates = function () {
 //отслеживатель в картах, запускает функцию
 mainPinMarker.on('moveend', transferCoordinates());
 
+//форма цена и тип
+const typeField = yourOfferForm.querySelector('#type');
+const priceField = yourOfferForm.querySelector('#price');
+const timeinField = yourOfferForm.querySelector('#timein');
+const timeoutField = yourOfferForm.querySelector('#timeout');
+
+typeField.addEventListener('change', function () {
+  if (typeField.value === 'bungalow') {
+    priceField.setAttribute('min', 0);
+    priceField.placeholder = 0;}
+  else if (typeField.value === 'flat') {
+    priceField.setAttribute('min', 1000);
+    priceField.placeholder = 1000;
+  }
+  else if (typeField.value ==='house') {
+    priceField.setAttribute('min', 5000);
+    priceField.placeholder = 5000;
+  } else if (typeField.value === 'palace') {
+    priceField.setAttribute('min', 10000);
+    priceField.placeholder = 10000;
+  }
+})
+
+timeinField.addEventListener('change', function () {
+  if (timeinField.value === '12:00') {
+    timeoutField.value = '12:00';
+  } else if (timeinField.value === '13:00') {
+    timeoutField.value = '13:00';
+  } else if (timeinField.value === '14:00') {
+    timeoutField.value = '14:00';
+  }
+})
+
+timeoutField.addEventListener('change', function () {
+  if (timeoutField.value === '12:00') {
+    timeinField.value = '12:00';
+  } else if (timeoutField.value === '13:00') {
+    timeinField.value = '13:00';
+  } else if (timeoutField.value === '14:00') {
+    timeinField.value = '14:00';
+  }
+})
+
 export {placeCoordinates};
 
