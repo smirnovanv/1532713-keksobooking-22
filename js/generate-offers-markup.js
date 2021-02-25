@@ -2,11 +2,11 @@ import {createSimilarOffers} from './data.js';
 
 const offerTemplate = document.querySelector('#card').content;
 const offerCard = offerTemplate.querySelector('.popup');
-const mapBlock = document.querySelector('.map__canvas');
 
 let similarOffers = createSimilarOffers();
 
-similarOffers.forEach(function (currentOffer) {
+
+const generateOffersMarkup = function (currentOffer) {
   const newOffer = offerCard.cloneNode(true);
 
   const showApartmentType = function (currentApartment) {
@@ -22,7 +22,6 @@ similarOffers.forEach(function (currentOffer) {
     }
   };
 
-  //Удобства
   const createFeaturesList = function (apartmentOffer) {
     let currentfeaturesList = document.createDocumentFragment();
 
@@ -55,8 +54,6 @@ similarOffers.forEach(function (currentOffer) {
   let newFeaturesList = featuresList.cloneNode(false);
   newFeaturesList.appendChild(createFeaturesList(currentOffer));
 
-
-  //Изображения в галерею
   const imagesList = newOffer.querySelector('.popup__photos');
   const imagePattern = newOffer.querySelector('.popup__photo');
   let newImagesList = imagesList.cloneNode(false);
@@ -84,7 +81,10 @@ similarOffers.forEach(function (currentOffer) {
   newOffer.replaceChild(newImagesList, imagesList);
   newOffer.querySelector('.popup__avatar').src = currentOffer.author.avatar;
 
-  mapBlock.appendChild(newOffer);
-})
+  return newOffer;
+}
+
+export {similarOffers, generateOffersMarkup};
+
 
 
