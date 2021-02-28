@@ -1,5 +1,8 @@
 /* global L:readonly */
-import {similarOffers, generateOffersMarkup} from './generate-offers-markup.js';
+import {generateOffersMarkup} from './generate-offers-markup.js';
+
+const DEFAULT_LAT = 35.6895;
+const DEFAULT_LNG = 139.69171;
 
 let loadStatus = false;
 const map = L.map('map-canvas')
@@ -7,9 +10,9 @@ const map = L.map('map-canvas')
     loadStatus = true;
   })
   .setView({
-    lat: 35.6895,
-    lng: 139.69171,
-  }, 12);
+    lat: DEFAULT_LAT,
+    lng: DEFAULT_LNG,
+  }, 10);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -24,10 +27,10 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-const mainPinMarker = L.marker(
+let mainPinMarker = L.marker(
   {
-    lat: 35.68221,
-    lng: 139.73595,
+    lat: DEFAULT_LAT,
+    lng: DEFAULT_LNG,
   },
   {
     draggable: true,
@@ -37,10 +40,13 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-similarOffers.forEach(function (similarOffer) {
+const resetMainMarker = function () {
+  mainPinMarker.setLatLng([DEFAULT_LAT, DEFAULT_LNG]);
+}
 
-  const lat = similarOffer.location.x;
-  const lng = similarOffer.location.y;
+const addPin = function (apartmentOffer) {
+  const lat = apartmentOffer.location.lat;
+  const lng = apartmentOffer.location.lng;
   const icon = L.icon({
     iconUrl: 'img/pin.svg',
     iconSize: [40, 40],
@@ -59,8 +65,8 @@ similarOffers.forEach(function (similarOffer) {
   marker
     .addTo(map)
     .bindPopup(
-      generateOffersMarkup(similarOffer),
+      generateOffersMarkup(apartmentOffer),
     );
-})
+}
 
-export {loadStatus, mainPinMarker};
+export {map, addPin, loadStatus, mainPinMarker, DEFAULT_LAT, DEFAULT_LNG, resetMainMarker};
