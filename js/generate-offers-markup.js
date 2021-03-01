@@ -1,9 +1,5 @@
-import {createSimilarOffers} from './data.js';
-
 const offerTemplate = document.querySelector('#card').content;
 const offerCard = offerTemplate.querySelector('.popup');
-
-let similarOffers = createSimilarOffers();
 
 
 const generateOffersMarkup = function (currentOffer) {
@@ -84,7 +80,7 @@ const generateOffersMarkup = function (currentOffer) {
   return newOffer;
 }
 
-export {similarOffers, generateOffersMarkup};
+export {generateOffersMarkup};
 
 
 
