@@ -1,4 +1,5 @@
-import {loadStatus, mainPinMarker} from './map.js';
+import {loadStatus, mainPinMarker, resetMainMarker, DEFAULT_LAT, DEFAULT_LNG} from './map.js';
+import {showSuccessWindow, showErrorWindow} from './modal-windows.js';
 
 const yourOfferForm = document.querySelector('.ad-form');
 const yourOfferFormFields = yourOfferForm.querySelectorAll('fieldset');
@@ -32,7 +33,7 @@ if (loadStatus === true) {
 
 // Поле координат
 addressField.setAttribute('readonly', '');
-addressField.value = '35.6895, 139.69171';
+addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
 
 let placeCoordinates = function (evt) {
   let coordinates = evt.target.getLatLng();
@@ -90,5 +91,80 @@ timeoutField.addEventListener('change', function () {
   }
 })
 
-export {placeCoordinates};
+// форма задание 9
+const roomNumberField = yourOfferForm.querySelector('#room_number');
+const capacityField = yourOfferForm.querySelector('#capacity');
+const capacityOptions = capacityField.querySelectorAll('option');
 
+
+roomNumberField.addEventListener('change', function () {
+  if (roomNumberField.value === '1') {
+    capacityOptions[2].removeAttribute('disabled');
+    capacityOptions[2].setAttribute('selected', '');
+    capacityOptions[0].setAttribute('disabled', '');
+    capacityOptions[1].setAttribute('disabled', '');
+    capacityOptions[3].setAttribute('disabled', '');
+  }
+  else if (roomNumberField.value === '2') {
+    capacityOptions[1].removeAttribute('disabled');
+    capacityOptions[2].removeAttribute('disabled');
+    capacityOptions[1].setAttribute('selected', '');
+    capacityOptions[0].setAttribute('disabled', '');
+    capacityOptions[3].setAttribute('disabled', '');
+  }
+  else if (roomNumberField.value === '3') {
+    capacityOptions[0].removeAttribute('disabled');
+    capacityOptions[1].removeAttribute('disabled');
+    capacityOptions[2].removeAttribute('disabled');
+    capacityOptions[0].setAttribute('selected', '');
+    capacityOptions[3].setAttribute('disabled', '');
+  }
+  else if (roomNumberField.value === '100') {
+    capacityOptions[3].removeAttribute('disabled');
+    capacityOptions[3].setAttribute('selected', '');
+    capacityOptions[0].setAttribute('disabled', '');
+    capacityOptions[1].setAttribute('disabled', '');
+    capacityOptions[2].setAttribute('disabled', '');
+  }
+})
+
+const formReset = function () {
+  yourOfferForm.reset();
+  priceField.setAttribute('min', '1000');
+  priceField.setAttribute('placeholder', '1000');
+  capacityOptions.forEach((capacityOption) => capacityOption.removeAttribute('disabled'));
+  capacityOptions.forEach((capacityOption) => capacityOption.removeAttribute('selected'));
+  capacityOptions[2].setAttribute('selected', '');
+
+  resetMainMarker();
+  addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
+}
+
+//Отправка оффера
+
+yourOfferForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  fetch(
+    'https://22.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  ).then((response) => {if (response.ok) {
+    formReset();
+    showSuccessWindow();
+  } else {
+    showErrorWindow();
+  }},
+  ).catch(() => showErrorWindow())
+});
+
+const resetButton = document.querySelector('.ad-form__reset');
+
+resetButton.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  formReset();
+});

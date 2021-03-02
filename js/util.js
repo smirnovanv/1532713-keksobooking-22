@@ -28,4 +28,8 @@ const createMocks = function (originalArray) {
   return newArray;
 }
 
-export {getRandomInRange, getRandomFloatNumber, createMocks};
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+export {getRandomInRange, getRandomFloatNumber, createMocks, isEscEvent};
