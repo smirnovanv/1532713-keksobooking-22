@@ -81,6 +81,3 @@ const generateOffersMarkup = function (currentOffer) {
 }
 
 export {generateOffersMarkup};
-
-
-

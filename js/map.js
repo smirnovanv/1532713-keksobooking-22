@@ -44,6 +44,12 @@ const resetMainMarker = function () {
   mainPinMarker.setLatLng([DEFAULT_LAT, DEFAULT_LNG]);
 }
 
+let markers = L.layerGroup([]);
+
+const removeMarkers = function () {
+  markers.clearLayers();
+}
+
 const addPin = function (apartmentOffer) {
   const lat = apartmentOffer.location.lat;
   const lng = apartmentOffer.location.lng;
@@ -63,10 +69,12 @@ const addPin = function (apartmentOffer) {
   );
 
   marker
-    .addTo(map)
     .bindPopup(
       generateOffersMarkup(apartmentOffer),
     );
+
+  markers.addLayer(marker).addTo(map);
+
 }
 
-export {map, addPin, loadStatus, mainPinMarker, DEFAULT_LAT, DEFAULT_LNG, resetMainMarker};
+export {map, addPin, loadStatus, mainPinMarker, DEFAULT_LAT, DEFAULT_LNG, resetMainMarker, removeMarkers};
