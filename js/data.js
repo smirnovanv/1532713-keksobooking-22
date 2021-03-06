@@ -1,3 +1,0 @@
-const SIMILAR_OFFERS_COUNT = 10;
-
-export {SIMILAR_OFFERS_COUNT};
