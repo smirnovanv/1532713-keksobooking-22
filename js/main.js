@@ -7,7 +7,7 @@ import {closeSuccessWindow, closeErrorWindow, closeEscSuccessWindow, closeEscErr
 import './filter.js';
 import {getData} from './server.js';
 import {renderSimilarList} from './similar-list.js';
-import {selectHousingType} from './filter.js';
+import {selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures} from './filter.js';
 import {removeMarkers} from './map.js';
 
 getData((offers) => {
@@ -15,6 +15,22 @@ getData((offers) => {
   selectHousingType(() => {
     removeMarkers();
     renderSimilarList(offers)});
+  selectRoomsNumber(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  });
+  selectGuestsNumber(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  });
+  selectPriceRange(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  });
+  selectFeatures(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  });
 });
 
 closeSuccessWindow();
