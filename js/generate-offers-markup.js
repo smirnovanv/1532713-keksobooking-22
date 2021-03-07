@@ -1,7 +1,6 @@
 const offerTemplate = document.querySelector('#card').content;
 const offerCard = offerTemplate.querySelector('.popup');
 
-
 const generateOffersMarkup = function (currentOffer) {
   const newOffer = offerCard.cloneNode(true);
 

@@ -74,7 +74,6 @@ const addPin = function (apartmentOffer) {
     );
 
   markers.addLayer(marker).addTo(map);
-
 }
 
 export {map, addPin, loadStatus, mainPinMarker, DEFAULT_LAT, DEFAULT_LNG, resetMainMarker, removeMarkers};

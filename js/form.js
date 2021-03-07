@@ -138,33 +138,39 @@ const formReset = function () {
 
   resetMainMarker();
   addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
-}
+};
 
 //Отправка оффера
+const sendOffer = function (cb) {
+  yourOfferForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-yourOfferForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+    const formData = new FormData(evt.target);
 
-  const formData = new FormData(evt.target);
-
-  fetch(
-    'https://22.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body: formData,
-    },
-  ).then((response) => {if (response.ok) {
-    formReset();
-    showSuccessWindow();
-  } else {
-    showErrorWindow();
-  }},
-  ).catch(() => showErrorWindow())
-});
+    fetch(
+      'https://22.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then((response) => {if (response.ok) {
+      formReset();
+      cb();
+      showSuccessWindow();
+    } else {
+      showErrorWindow();
+    }},
+    ).catch(() => showErrorWindow())
+  })
+};
 
 const resetButton = document.querySelector('.ad-form__reset');
 
-resetButton.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  formReset();
-});
+const clickResetButton = function (cb) {
+  resetButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    cb();
+  });
+}
+
+export {clickResetButton, formReset, sendOffer};

@@ -1,4 +1,3 @@
-
 import {startFilter} from './filter.js';
 
 const getData = function (onSuccess) {

@@ -1,3 +1,5 @@
+/* global _:readonly */
+
 import './generate-offers-markup.js';
 import './map.js';
 import './form.js';
@@ -7,29 +9,56 @@ import {closeSuccessWindow, closeErrorWindow, closeEscSuccessWindow, closeEscErr
 import './filter.js';
 import {getData} from './server.js';
 import {renderSimilarList} from './similar-list.js';
-import {selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures} from './filter.js';
+import {selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures, mapFiltersForm} from './filter.js';
 import {removeMarkers} from './map.js';
+import {clickResetButton, formReset, sendOffer} from './form.js';
+
+const RERENDER_DELAY = 500;
 
 getData((offers) => {
   renderSimilarList(offers);
-  selectHousingType(() => {
-    removeMarkers();
-    renderSimilarList(offers)});
-  selectRoomsNumber(() => {
+
+  selectHousingType(_.debounce(() => {
     removeMarkers();
     renderSimilarList(offers)
+  }, RERENDER_DELAY,
+  ));
+
+  selectRoomsNumber(_.debounce(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  }, RERENDER_DELAY,
+  ));
+
+  selectGuestsNumber(_.debounce(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  }, RERENDER_DELAY,
+  ));
+
+  selectPriceRange(_.debounce(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  }, RERENDER_DELAY,
+  ));
+
+  selectFeatures(_.debounce(() => {
+    removeMarkers();
+    renderSimilarList(offers)
+  }, RERENDER_DELAY,
+  ));
+
+  clickResetButton(() => {
+    formReset();
+    mapFiltersForm.reset();
+    removeMarkers();
+    renderSimilarList(offers);
   });
-  selectGuestsNumber(() => {
+
+  sendOffer(() => {
+    mapFiltersForm.reset();
     removeMarkers();
-    renderSimilarList(offers)
-  });
-  selectPriceRange(() => {
-    removeMarkers();
-    renderSimilarList(offers)
-  });
-  selectFeatures(() => {
-    removeMarkers();
-    renderSimilarList(offers)
+    renderSimilarList(offers);
   });
 });
 
@@ -37,9 +66,3 @@ closeSuccessWindow();
 closeErrorWindow();
 closeEscSuccessWindow();
 closeEscErrorWindow();
-
-
-
-
-
-

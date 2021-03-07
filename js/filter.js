@@ -69,4 +69,4 @@ const selectFeatures = function (cb) {
   })
 }
 
-export {startFilter, selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures, housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, housingFeaturesField, wifiField, dishwasherField, parkingField, washerField, elevatorField, conditionerField};
+export {startFilter, mapFiltersForm, selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures, housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, housingFeaturesField, wifiField, dishwasherField, parkingField, washerField, elevatorField, conditionerField};
