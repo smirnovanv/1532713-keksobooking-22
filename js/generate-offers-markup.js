@@ -1,12 +1,6 @@
 const offerTemplate = document.querySelector('#card').content;
 const offerCard = offerTemplate.querySelector('.popup');
 
-/*
-if (apartmentOffer.offer.features.length === 0) {
-    currentFeaturesList.classList.add('visually-hidden')
-  }
-*/
-
 const generateOffersMarkup = function (currentOffer) {
   const newOffer = offerCard.cloneNode(true);
 
@@ -25,7 +19,6 @@ const generateOffersMarkup = function (currentOffer) {
 
   const createFeaturesList = function (apartmentOffer) {
     let currentFeaturesList = document.createDocumentFragment();
-    console.log(currentFeaturesList);
 
     for (let i = 0; i < apartmentOffer.offer.features.length; i++) {
       let newFeature = document.createElement('li');
