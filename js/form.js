@@ -1,4 +1,4 @@
-import {loadStatus, mainPinMarker, resetMainMarker, DEFAULT_LAT, DEFAULT_LNG} from './map.js';
+import {getMapLoadStatus, mainPinMarker, resetMainMarker, DEFAULT_LAT, DEFAULT_LNG} from './map.js';
 import {showSuccessWindow, showErrorWindow} from './modal-windows.js';
 
 const yourOfferForm = document.querySelector('.ad-form');
@@ -19,7 +19,7 @@ mapFilterFields.forEach(function (mapFilterField) {
 })
 mapFilterFeature.setAttribute('disabled', '');
 
-if (loadStatus === true) {
+if (getMapLoadStatus()) {
   yourOfferForm.classList.remove('ad-form--disabled');
   yourOfferFormFields.forEach(function (currentField) {
     currentField.removeAttribute('disabled');

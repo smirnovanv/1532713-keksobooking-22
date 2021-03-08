@@ -5,6 +5,7 @@ const DEFAULT_LAT = 35.6895;
 const DEFAULT_LNG = 139.69171;
 
 let loadStatus = false;
+
 const map = L.map('map-canvas')
   .on('load', function () {
     loadStatus = true;
@@ -21,13 +22,21 @@ L.tileLayer(
   },
 ).addTo(map);
 
+const getMapLoadStatus = function () {
+  if (loadStatus === true) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const mainPinIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
-let mainPinMarker = L.marker(
+const mainPinMarker = L.marker(
   {
     lat: DEFAULT_LAT,
     lng: DEFAULT_LNG,
@@ -76,4 +85,4 @@ const addPin = function (apartmentOffer) {
   markers.addLayer(marker).addTo(map);
 }
 
-export {map, addPin, loadStatus, mainPinMarker, DEFAULT_LAT, DEFAULT_LNG, resetMainMarker, removeMarkers};
+export {map, addPin, getMapLoadStatus, mainPinMarker, DEFAULT_LAT, DEFAULT_LNG, resetMainMarker, removeMarkers};

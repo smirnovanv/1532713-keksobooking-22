@@ -1,4 +1,4 @@
-import {loadStatus} from './map.js';
+import {getMapLoadStatus} from './map.js';
 
 const mapFiltersForm = document.querySelector('.map__filters');
 const filterSelectFields = mapFiltersForm.querySelectorAll('select');
@@ -14,7 +14,7 @@ filterFeaturesField.setAttribute('disabled', '');
 
 
 const startFilter = function () {
-  if (loadStatus === true) {
+  if (getMapLoadStatus()) {
     mapFiltersForm.classList.remove('map__filters--disabled');
     filterSelectFields.forEach(function (currentFilterField) {
       currentFilterField.removeAttribute('disabled');
