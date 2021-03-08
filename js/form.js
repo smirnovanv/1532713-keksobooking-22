@@ -3,9 +3,6 @@ import {showSuccessWindow, showErrorWindow} from './modal-windows.js';
 
 const yourOfferForm = document.querySelector('.ad-form');
 const yourOfferFormFields = yourOfferForm.querySelectorAll('fieldset');
-const mapFilter = document.querySelector('.map__filters');
-const mapFilterFields = mapFilter.querySelectorAll('select');
-const mapFilterFeature = mapFilter.querySelector('fieldset');
 const addressField = yourOfferForm.querySelector('#address');
 
 yourOfferForm.classList.add('ad-form--disabled');
@@ -13,22 +10,11 @@ yourOfferFormFields.forEach(function (currentField) {
   currentField.setAttribute('disabled', '');
 })
 
-mapFilter.classList.add('map__filters--disabled');
-mapFilterFields.forEach(function (mapFilterField) {
-  mapFilterField.setAttribute('disabled', '');
-})
-mapFilterFeature.setAttribute('disabled', '');
-
 if (getMapLoadStatus()) {
   yourOfferForm.classList.remove('ad-form--disabled');
   yourOfferFormFields.forEach(function (currentField) {
     currentField.removeAttribute('disabled');
   });
-  mapFilter.classList.remove('map__filters--disabled');
-  mapFilterFields.forEach(function (mapFilterField) {
-    mapFilterField.removeAttribute('disabled');
-  });
-  mapFilterFeature.removeAttribute('disabled');
 }
 
 // Поле координат
