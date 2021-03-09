@@ -16,20 +16,26 @@ const showSuccessWindow = function () {
   mapCanvas.style.zIndex = -1;
 }
 
-const closeSuccessWindow = function () {
+const onMainClick = function () {
   main.addEventListener('click', function () {
     if (main.contains(successfulAdWindow)) {
       main.removeChild(successfulAdWindow);
+      mapCanvas.style.zIndex = 10;
+    } else if (main.contains(errorAdWindow)) {
+      main.removeChild(errorAdWindow);
       mapCanvas.style.zIndex = 10;
     }
   })
 }
 
-const closeEscSuccessWindow = function () {
+const onMainEscKeydown = function () {
   main.addEventListener('keydown', function (evt) {
     if (isEscEvent(evt)) {
       if (main.contains(successfulAdWindow)) {
         main.removeChild(successfulAdWindow);
+        mapCanvas.style.zIndex = 10;
+      } else if (main.contains(errorAdWindow)) {
+        main.removeChild(errorAdWindow);
         mapCanvas.style.zIndex = 10;
       }
     }
@@ -42,6 +48,7 @@ const showErrorWindow = function () {
   mapCanvas.style.zIndex = -1;
 }
 
+/*
 const closeErrorWindow = function () {
   main.addEventListener('click', function () {
     if (main.contains(errorAdWindow)) {
@@ -50,6 +57,7 @@ const closeErrorWindow = function () {
     }
   })
 }
+
 
 const closeEscErrorWindow = function () {
   main.addEventListener('keydown', function (evt) {
@@ -62,5 +70,6 @@ const closeEscErrorWindow = function () {
   },
   )
 }
+*/
 
-export {showSuccessWindow, closeSuccessWindow, showErrorWindow, closeErrorWindow, closeEscSuccessWindow, closeEscErrorWindow};
+export {showSuccessWindow, onMainClick, showErrorWindow, onMainEscKeydown};

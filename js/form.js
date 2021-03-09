@@ -127,7 +127,7 @@ const formReset = function () {
 };
 
 //Отправка оффера
-const sendOffer = function (cb) {
+const onOfferFormSumbmit = function (cb) {
   yourOfferForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -152,11 +152,11 @@ const sendOffer = function (cb) {
 
 const resetButton = document.querySelector('.ad-form__reset');
 
-const clickResetButton = function (cb) {
+const onResetButtonClick = function (cb) {
   resetButton.addEventListener('click', function (evt) {
     evt.preventDefault();
     cb();
   });
 }
 
-export {clickResetButton, formReset, sendOffer};
+export {onResetButtonClick, formReset, onOfferFormSumbmit};

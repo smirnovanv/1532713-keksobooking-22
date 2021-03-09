@@ -5,64 +5,62 @@ import './map.js';
 import './form.js';
 import './server.js';
 import './modal-windows.js';
-import {closeSuccessWindow, closeErrorWindow, closeEscSuccessWindow, closeEscErrorWindow} from './modal-windows.js';
+import {onMainClick, onMainEscKeydown} from './modal-windows.js';
 import './filter.js';
 import {getData} from './server.js';
 import {renderSimilarList} from './similar-list.js';
-import {selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures, mapFiltersForm} from './filter.js';
+import {onHousingTypeFieldChange, onRoomsNumberFieldChange, onGuestsNumberFieldChange, onPriceRangeFieldChange, onFeaturesFieldChange, mapFiltersForm} from './filter.js';
 import {removeMarkers} from './map.js';
-import {clickResetButton, formReset, sendOffer} from './form.js';
+import {onResetButtonClick, formReset, onOfferFormSumbmit} from './form.js';
 
 const RERENDER_DELAY = 500;
 
 getData((offers) => {
   renderSimilarList(offers);
 
-  selectHousingType(_.debounce(() => {
+  onHousingTypeFieldChange(_.debounce(() => {
     removeMarkers();
     renderSimilarList(offers)
   }, RERENDER_DELAY,
   ));
 
-  selectRoomsNumber(_.debounce(() => {
+  onRoomsNumberFieldChange(_.debounce(() => {
     removeMarkers();
     renderSimilarList(offers)
   }, RERENDER_DELAY,
   ));
 
-  selectGuestsNumber(_.debounce(() => {
+  onGuestsNumberFieldChange(_.debounce(() => {
     removeMarkers();
     renderSimilarList(offers)
   }, RERENDER_DELAY,
   ));
 
-  selectPriceRange(_.debounce(() => {
+  onPriceRangeFieldChange(_.debounce(() => {
     removeMarkers();
     renderSimilarList(offers)
   }, RERENDER_DELAY,
   ));
 
-  selectFeatures(_.debounce(() => {
+  onFeaturesFieldChange(_.debounce(() => {
     removeMarkers();
     renderSimilarList(offers)
   }, RERENDER_DELAY,
   ));
 
-  clickResetButton(() => {
+  onResetButtonClick(() => {
     formReset();
     mapFiltersForm.reset();
     removeMarkers();
     renderSimilarList(offers);
   });
 
-  sendOffer(() => {
+  onOfferFormSumbmit(() => {
     mapFiltersForm.reset();
     removeMarkers();
     renderSimilarList(offers);
   });
 });
 
-closeSuccessWindow();
-closeErrorWindow();
-closeEscSuccessWindow();
-closeEscErrorWindow();
+onMainClick();
+onMainEscKeydown();
