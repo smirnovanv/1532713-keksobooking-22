@@ -9,8 +9,8 @@ const createSuitableArray = function (allOffers) {
 
   allOffers.forEach(function (currentOffer) {
     if ((currentOffer.offer.type === housingTypeField.value || housingTypeField.value === 'any')
-    && (currentOffer.offer.rooms == housingRoomsField.value || housingRoomsField.value === 'any')
-    && (currentOffer.offer.guests == housingGuestsField.value || housingGuestsField.value === 'any')
+    && (currentOffer.offer.rooms === Number(housingRoomsField.value) || housingRoomsField.value === 'any')
+    && (currentOffer.offer.guests === Number(housingGuestsField.value) || housingGuestsField.value === 'any')
     && ((currentOffer.offer.price < 10000 && housingPriceField.value === 'low')
     || (currentOffer.offer.price > 50000 && housingPriceField.value === 'high')
     || (currentOffer.offer.price >= 10000 && currentOffer.offer.price <= 50000 && housingPriceField.value === 'middle')

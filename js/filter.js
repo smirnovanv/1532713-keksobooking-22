@@ -1,4 +1,4 @@
-import {loadStatus} from './map.js';
+import {getMapLoadStatus} from './map.js';
 
 const mapFiltersForm = document.querySelector('.map__filters');
 const filterSelectFields = mapFiltersForm.querySelectorAll('select');
@@ -14,7 +14,7 @@ filterFeaturesField.setAttribute('disabled', '');
 
 
 const startFilter = function () {
-  if (loadStatus === true) {
+  if (getMapLoadStatus()) {
     mapFiltersForm.classList.remove('map__filters--disabled');
     filterSelectFields.forEach(function (currentFilterField) {
       currentFilterField.removeAttribute('disabled');
@@ -39,34 +39,34 @@ const conditionerField = housingFeaturesField.querySelector('#filter-conditioner
 
 
 
-const selectHousingType = function (cb) {
+const onHousingTypeFieldChange = function (cb) {
   housingTypeField.addEventListener('change', function () {
     cb();
   })
 }
 
-const selectRoomsNumber = function (cb) {
+const onRoomsNumberFieldChange = function (cb) {
   housingRoomsField.addEventListener('change', function () {
     cb();
   })
 }
 
-const selectGuestsNumber = function (cb) {
+const onGuestsNumberFieldChange = function (cb) {
   housingGuestsField.addEventListener('change', function () {
     cb();
   })
 }
 
-const selectPriceRange = function (cb) {
+const onPriceRangeFieldChange = function (cb) {
   housingPriceField.addEventListener('change', function () {
     cb();
   })
 }
 
-const selectFeatures = function (cb) {
+const onFeaturesFieldChange = function (cb) {
   housingFeaturesField.addEventListener('change', function () {
     cb();
   })
 }
 
-export {startFilter, selectHousingType, selectRoomsNumber, selectGuestsNumber, selectPriceRange, selectFeatures, housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, housingFeaturesField, wifiField, dishwasherField, parkingField, washerField, elevatorField, conditionerField};
+export {startFilter, mapFiltersForm, onHousingTypeFieldChange, onRoomsNumberFieldChange, onGuestsNumberFieldChange, onPriceRangeFieldChange, onFeaturesFieldChange, housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, housingFeaturesField, wifiField, dishwasherField, parkingField, washerField, elevatorField, conditionerField};

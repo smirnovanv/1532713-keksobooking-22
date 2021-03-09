@@ -1,7 +1,6 @@
 const offerTemplate = document.querySelector('#card').content;
 const offerCard = offerTemplate.querySelector('.popup');
 
-
 const generateOffersMarkup = function (currentOffer) {
   const newOffer = offerCard.cloneNode(true);
 
@@ -19,7 +18,7 @@ const generateOffersMarkup = function (currentOffer) {
   };
 
   const createFeaturesList = function (apartmentOffer) {
-    let currentfeaturesList = document.createDocumentFragment();
+    let currentFeaturesList = document.createDocumentFragment();
 
     for (let i = 0; i < apartmentOffer.offer.features.length; i++) {
       let newFeature = document.createElement('li');
@@ -42,18 +41,21 @@ const generateOffersMarkup = function (currentOffer) {
       if (apartmentOffer.offer.features[i].includes('conditioner')) {
         newFeature.classList.add('popup__feature--conditioner');
       }
-      currentfeaturesList.appendChild(newFeature);
+      currentFeaturesList.appendChild(newFeature);
     }
-    return currentfeaturesList;
+    return currentFeaturesList;
   }
+
   const featuresList = newOffer.querySelector('.popup__features');
   let newFeaturesList = featuresList.cloneNode(false);
+  if (currentOffer.offer.features.length === 0) {newFeaturesList.classList.add('visually-hidden')}
+
   newFeaturesList.appendChild(createFeaturesList(currentOffer));
 
   const imagesList = newOffer.querySelector('.popup__photos');
   const imagePattern = newOffer.querySelector('.popup__photo');
   let newImagesList = imagesList.cloneNode(false);
-
+  if (currentOffer.offer.photos.length === 0) {newImagesList.classList.add('visually-hidden')}
   const createImages = function (apartment) {
     let currentImagesList = document.createDocumentFragment();
 
