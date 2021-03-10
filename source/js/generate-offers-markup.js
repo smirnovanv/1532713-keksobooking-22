@@ -1,10 +1,10 @@
 const offerTemplate = document.querySelector('#card').content;
 const offerCard = offerTemplate.querySelector('.popup');
 
-const generateOffersMarkup = function (currentOffer) {
+const generateOffersMarkup = (currentOffer) => {
   const newOffer = offerCard.cloneNode(true);
 
-  const showApartmentType = function (currentApartment) {
+  const showApartmentType = (currentApartment) => {
     switch (currentApartment.offer.type) {
       case 'flat':
         return 'Квартира';
@@ -17,7 +17,7 @@ const generateOffersMarkup = function (currentOffer) {
     }
   };
 
-  const createFeaturesList = function (apartmentOffer) {
+  const createFeaturesList = (apartmentOffer) => {
     let currentFeaturesList = document.createDocumentFragment();
 
     for (let i = 0; i < apartmentOffer.offer.features.length; i++) {
@@ -56,7 +56,7 @@ const generateOffersMarkup = function (currentOffer) {
   const imagePattern = newOffer.querySelector('.popup__photo');
   let newImagesList = imagesList.cloneNode(false);
   if (currentOffer.offer.photos.length === 0) {newImagesList.classList.add('visually-hidden')}
-  const createImages = function (apartment) {
+  const createImages = (apartment) => {
     let currentImagesList = document.createDocumentFragment();
 
     for (let i = 0; i < apartment.offer.photos.length; i++) {

@@ -1,13 +1,12 @@
-import {addPin} from './map.js';
+import {addPin, removeMarkers} from './map.js';
 import {housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, wifiField, dishwasherField, parkingField, washerField, elevatorField, conditionerField} from './filter.js';
 
 const SIMILAR_OFFERS_COUNT = 10;
 
-const createSuitableArray = function (allOffers) {
+const createSuitableArray = (allOffers) => {
   let suitableOffers = [];
 
-
-  allOffers.forEach(function (currentOffer) {
+  allOffers.forEach((currentOffer) => {
     if ((currentOffer.offer.type === housingTypeField.value || housingTypeField.value === 'any')
     && (currentOffer.offer.rooms === Number(housingRoomsField.value) || housingRoomsField.value === 'any')
     && (currentOffer.offer.guests === Number(housingGuestsField.value) || housingGuestsField.value === 'any')
@@ -31,10 +30,11 @@ const createSuitableArray = function (allOffers) {
   return suitableOffers;
 }
 
-const renderSimilarList = function (similarOffers) {
+const renderSimilarList = (similarOffers) => {
+  removeMarkers();
   let copiedOffers = similarOffers.slice();
   let applicableOffers = createSuitableArray(copiedOffers).slice(0, SIMILAR_OFFERS_COUNT);
-  applicableOffers.forEach(function (offer) {
+  applicableOffers.forEach((offer) => {
     addPin(offer);
   })
 }

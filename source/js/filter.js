@@ -7,16 +7,15 @@ const filterFeaturesField = mapFiltersForm.querySelector('fieldset');
 //Активируем фильтр
 
 mapFiltersForm.classList.add('map__filters--disabled');
-filterSelectFields.forEach(function (currentFilterField) {
+filterSelectFields.forEach((currentFilterField) => {
   currentFilterField.setAttribute('disabled', '');
 });
 filterFeaturesField.setAttribute('disabled', '');
 
-
-const startFilter = function () {
+const startFilter = () => {
   if (getMapLoadStatus()) {
     mapFiltersForm.classList.remove('map__filters--disabled');
-    filterSelectFields.forEach(function (currentFilterField) {
+    filterSelectFields.forEach((currentFilterField) => {
       currentFilterField.removeAttribute('disabled');
     });
     filterFeaturesField.removeAttribute('disabled');
@@ -37,34 +36,32 @@ const washerField = housingFeaturesField.querySelector('#filter-washer');
 const elevatorField = housingFeaturesField.querySelector('#filter-elevator');
 const conditionerField = housingFeaturesField.querySelector('#filter-conditioner');
 
-
-
-const onHousingTypeFieldChange = function (cb) {
-  housingTypeField.addEventListener('change', function () {
+const onHousingTypeFieldChange = (cb) => {
+  housingTypeField.addEventListener('change', () => {
     cb();
   })
 }
 
-const onRoomsNumberFieldChange = function (cb) {
-  housingRoomsField.addEventListener('change', function () {
+const onRoomsNumberFieldChange = (cb) => {
+  housingRoomsField.addEventListener('change', () => {
     cb();
   })
 }
 
-const onGuestsNumberFieldChange = function (cb) {
-  housingGuestsField.addEventListener('change', function () {
+const onGuestsNumberFieldChange = (cb) => {
+  housingGuestsField.addEventListener('change', () => {
     cb();
   })
 }
 
-const onPriceRangeFieldChange = function (cb) {
-  housingPriceField.addEventListener('change', function () {
+const onPriceRangeFieldChange = (cb) => {
+  housingPriceField.addEventListener('change', () => {
     cb();
   })
 }
 
-const onFeaturesFieldChange = function (cb) {
-  housingFeaturesField.addEventListener('change', function () {
+const onFeaturesFieldChange = (cb) => {
+  housingFeaturesField.addEventListener('change', () => {
     cb();
   })
 }
