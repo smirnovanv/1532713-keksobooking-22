@@ -1,18 +1,21 @@
 import {getMapLoadStatus, mainPinMarker, resetMainMarker, DEFAULT_LAT, DEFAULT_LNG} from './map.js';
-import {showSuccessWindow, showErrorWindow} from './modal-windows.js';
+import {showSuccessWindow, showAdErrorWindow} from './modal-windows.js';
+import {avatarPreview, photosContainer} from './photo.js';
+
+const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 
 const yourOfferForm = document.querySelector('.ad-form');
 const yourOfferFormFields = yourOfferForm.querySelectorAll('fieldset');
 const addressField = yourOfferForm.querySelector('#address');
 
 yourOfferForm.classList.add('ad-form--disabled');
-yourOfferFormFields.forEach(function (currentField) {
+yourOfferFormFields.forEach((currentField) => {
   currentField.setAttribute('disabled', '');
 })
 
 if (getMapLoadStatus()) {
   yourOfferForm.classList.remove('ad-form--disabled');
-  yourOfferFormFields.forEach(function (currentField) {
+  yourOfferFormFields.forEach((currentField) => {
     currentField.removeAttribute('disabled');
   });
 }
@@ -21,13 +24,13 @@ if (getMapLoadStatus()) {
 addressField.setAttribute('readonly', '');
 addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
 
-let placeCoordinates = function (evt) {
+let placeCoordinates = (evt) => {
   let coordinates = evt.target.getLatLng();
 
   addressField.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 }
 
-let transferCoordinates = function () {
+let transferCoordinates = () => {
   return placeCoordinates;
 }
 
@@ -40,7 +43,7 @@ const priceField = yourOfferForm.querySelector('#price');
 const timeinField = yourOfferForm.querySelector('#timein');
 const timeoutField = yourOfferForm.querySelector('#timeout');
 
-typeField.addEventListener('change', function () {
+typeField.addEventListener('change', () => {
   if (typeField.value === 'bungalow') {
     priceField.setAttribute('min', 0);
     priceField.placeholder = 0;}
@@ -57,7 +60,7 @@ typeField.addEventListener('change', function () {
   }
 })
 
-timeinField.addEventListener('change', function () {
+timeinField.addEventListener('change', () => {
   if (timeinField.value === '12:00') {
     timeoutField.value = '12:00';
   } else if (timeinField.value === '13:00') {
@@ -67,7 +70,7 @@ timeinField.addEventListener('change', function () {
   }
 })
 
-timeoutField.addEventListener('change', function () {
+timeoutField.addEventListener('change', () => {
   if (timeoutField.value === '12:00') {
     timeinField.value = '12:00';
   } else if (timeoutField.value === '13:00') {
@@ -82,8 +85,7 @@ const roomNumberField = yourOfferForm.querySelector('#room_number');
 const capacityField = yourOfferForm.querySelector('#capacity');
 const capacityOptions = capacityField.querySelectorAll('option');
 
-
-roomNumberField.addEventListener('change', function () {
+roomNumberField.addEventListener('change', () => {
   if (roomNumberField.value === '1') {
     capacityOptions[2].removeAttribute('disabled');
     capacityOptions[2].setAttribute('selected', '');
@@ -114,20 +116,25 @@ roomNumberField.addEventListener('change', function () {
   }
 })
 
-const formReset = function () {
+const formReset = () => {
   yourOfferForm.reset();
   priceField.setAttribute('min', '1000');
   priceField.setAttribute('placeholder', '1000');
   capacityOptions.forEach((capacityOption) => capacityOption.removeAttribute('disabled'));
   capacityOptions.forEach((capacityOption) => capacityOption.removeAttribute('selected'));
   capacityOptions[2].setAttribute('selected', '');
+  avatarPreview.src = DEFAULT_AVATAR;
+
+  while (photosContainer.firstChild) {
+    photosContainer.removeChild(photosContainer.firstChild);
+  }
 
   resetMainMarker();
   addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
 };
 
 //Отправка оффера
-const onOfferFormSumbmit = function (cb) {
+const onOfferFormSumbmit = (cb) => {
   yourOfferForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -144,16 +151,16 @@ const onOfferFormSumbmit = function (cb) {
       cb();
       showSuccessWindow();
     } else {
-      showErrorWindow();
+      showAdErrorWindow();
     }},
-    ).catch(() => showErrorWindow())
+    ).catch(() => showAdErrorWindow())
   })
 };
 
 const resetButton = document.querySelector('.ad-form__reset');
 
-const onResetButtonClick = function (cb) {
-  resetButton.addEventListener('click', function (evt) {
+const onResetButtonClick = (cb) => {
+  resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     cb();
   });

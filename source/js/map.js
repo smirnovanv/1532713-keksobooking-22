@@ -7,7 +7,7 @@ const DEFAULT_LNG = 139.69171;
 let loadStatus = false;
 
 const map = L.map('map-canvas')
-  .on('load', function () {
+  .on('load', () => {
     loadStatus = true;
   })
   .setView({
@@ -22,12 +22,11 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const getMapLoadStatus = function () {
-  if (loadStatus === true) {
+const getMapLoadStatus = () => {
+  if (loadStatus) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 const mainPinIcon = L.icon({
@@ -49,17 +48,17 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-const resetMainMarker = function () {
+const resetMainMarker = () => {
   mainPinMarker.setLatLng([DEFAULT_LAT, DEFAULT_LNG]);
 }
 
 let markers = L.layerGroup([]);
 
-const removeMarkers = function () {
+const removeMarkers = () => {
   markers.clearLayers();
 }
 
-const addPin = function (apartmentOffer) {
+const addPin = (apartmentOffer) => {
   const lat = apartmentOffer.location.lat;
   const lng = apartmentOffer.location.lng;
   const icon = L.icon({

@@ -1,6 +1,7 @@
 import {startFilter} from './filter.js';
+import {showAlert} from './util.js';
 
-const getData = function (onSuccess) {
+const getData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => {if (response.ok) {
       startFilter();
@@ -9,10 +10,10 @@ const getData = function (onSuccess) {
       })
     }
     else {
-      alert('Ошибка! Похожие объявления не были загружены.')
+      showAlert('Ошибка! Похожие объявления не были загружены.');
     }
     })
-    .catch(() => alert('Ошибка! Похожие объявления не были загружены.'));
+    .catch(() => showAlert('Ошибка! Похожие объявления не были загружены.'));
 }
 
 export {getData};
