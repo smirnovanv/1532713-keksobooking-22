@@ -7,6 +7,14 @@ const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const yourOfferForm = document.querySelector('.ad-form');
 const yourOfferFormFields = yourOfferForm.querySelectorAll('fieldset');
 const addressField = yourOfferForm.querySelector('#address');
+const typeField = yourOfferForm.querySelector('#type');
+const priceField = yourOfferForm.querySelector('#price');
+const timeinField = yourOfferForm.querySelector('#timein');
+const timeoutField = yourOfferForm.querySelector('#timeout');
+const roomNumberField = yourOfferForm.querySelector('#room_number');
+const capacityField = yourOfferForm.querySelector('#capacity');
+const capacityOptions = capacityField.querySelectorAll('option');
+const resetButton = document.querySelector('.ad-form__reset');
 
 yourOfferForm.classList.add('ad-form--disabled');
 yourOfferFormFields.forEach((currentField) => {
@@ -20,7 +28,6 @@ if (getMapLoadStatus()) {
   });
 }
 
-// Поле координат
 addressField.setAttribute('readonly', '');
 addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
 
@@ -34,14 +41,7 @@ let transferCoordinates = () => {
   return placeCoordinates;
 }
 
-//отслеживатель в картах, запускает функцию
 mainPinMarker.on('moveend', transferCoordinates());
-
-//форма цена и тип
-const typeField = yourOfferForm.querySelector('#type');
-const priceField = yourOfferForm.querySelector('#price');
-const timeinField = yourOfferForm.querySelector('#timein');
-const timeoutField = yourOfferForm.querySelector('#timeout');
 
 typeField.addEventListener('change', () => {
   if (typeField.value === 'bungalow') {
@@ -80,18 +80,16 @@ timeoutField.addEventListener('change', () => {
   }
 })
 
-// форма задание 9
-const roomNumberField = yourOfferForm.querySelector('#room_number');
-const capacityField = yourOfferForm.querySelector('#capacity');
-const capacityOptions = capacityField.querySelectorAll('option');
-
 roomNumberField.addEventListener('change', () => {
   if (roomNumberField.value === '1') {
     capacityOptions[2].removeAttribute('disabled');
-    capacityOptions[2].setAttribute('selected', '');
     capacityOptions[0].setAttribute('disabled', '');
     capacityOptions[1].setAttribute('disabled', '');
     capacityOptions[3].setAttribute('disabled', '');
+    capacityOptions[2].setAttribute('selected', '');
+    capacityOptions[0].removeAttribute('selected');
+    capacityOptions[1].removeAttribute('selected');
+    capacityOptions[3].removeAttribute('selected');
   }
   else if (roomNumberField.value === '2') {
     capacityOptions[1].removeAttribute('disabled');
@@ -99,6 +97,9 @@ roomNumberField.addEventListener('change', () => {
     capacityOptions[1].setAttribute('selected', '');
     capacityOptions[0].setAttribute('disabled', '');
     capacityOptions[3].setAttribute('disabled', '');
+    capacityOptions[0].removeAttribute('selected');
+    capacityOptions[2].removeAttribute('selected');
+    capacityOptions[3].removeAttribute('selected');
   }
   else if (roomNumberField.value === '3') {
     capacityOptions[0].removeAttribute('disabled');
@@ -106,6 +107,9 @@ roomNumberField.addEventListener('change', () => {
     capacityOptions[2].removeAttribute('disabled');
     capacityOptions[0].setAttribute('selected', '');
     capacityOptions[3].setAttribute('disabled', '');
+    capacityOptions[1].removeAttribute('selected');
+    capacityOptions[2].removeAttribute('selected');
+    capacityOptions[3].removeAttribute('selected');
   }
   else if (roomNumberField.value === '100') {
     capacityOptions[3].removeAttribute('disabled');
@@ -113,6 +117,9 @@ roomNumberField.addEventListener('change', () => {
     capacityOptions[0].setAttribute('disabled', '');
     capacityOptions[1].setAttribute('disabled', '');
     capacityOptions[2].setAttribute('disabled', '');
+    capacityOptions[0].removeAttribute('selected');
+    capacityOptions[1].removeAttribute('selected');
+    capacityOptions[2].removeAttribute('selected');
   }
 })
 
@@ -133,7 +140,6 @@ const formReset = () => {
   addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
 };
 
-//Отправка оффера
 const onOfferFormSumbmit = (cb) => {
   yourOfferForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -156,8 +162,6 @@ const onOfferFormSumbmit = (cb) => {
     ).catch(() => showAdErrorWindow())
   })
 };
-
-const resetButton = document.querySelector('.ad-form__reset');
 
 const onResetButtonClick = (cb) => {
   resetButton.addEventListener('click', (evt) => {

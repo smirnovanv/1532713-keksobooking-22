@@ -3,6 +3,8 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const loadAvatarField = document.querySelector('#avatar');
 const avatarContainer = document.querySelector('.ad-form-header__preview');
 const avatarPreview = avatarContainer.querySelector('img');
+const loadImagesField = document.querySelector('#images');
+const photosContainer = document.querySelector('.ad-form__photo');
 
 loadAvatarField.addEventListener('change', () => {
   const file = loadAvatarField.files[0];
@@ -22,9 +24,6 @@ loadAvatarField.addEventListener('change', () => {
     reader.readAsDataURL(file);
   }
 });
-
-const loadImagesField = document.querySelector('#images');
-const photosContainer = document.querySelector('.ad-form__photo');
 
 loadImagesField.addEventListener('change', () => {
   const file = loadImagesField.files[0];

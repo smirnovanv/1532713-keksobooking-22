@@ -2,6 +2,8 @@ import {addPin, removeMarkers} from './map.js';
 import {housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, wifiField, dishwasherField, parkingField, washerField, elevatorField, conditionerField} from './filter.js';
 
 const SIMILAR_OFFERS_COUNT = 10;
+const MEDIUM_PRICE = 10000;
+const HIGH_PRICE = 50000;
 
 const createSuitableArray = (allOffers) => {
   let suitableOffers = [];
@@ -10,12 +12,11 @@ const createSuitableArray = (allOffers) => {
     if ((currentOffer.offer.type === housingTypeField.value || housingTypeField.value === 'any')
     && (currentOffer.offer.rooms === Number(housingRoomsField.value) || housingRoomsField.value === 'any')
     && (currentOffer.offer.guests === Number(housingGuestsField.value) || housingGuestsField.value === 'any')
-    && ((currentOffer.offer.price < 10000 && housingPriceField.value === 'low')
-    || (currentOffer.offer.price > 50000 && housingPriceField.value === 'high')
-    || (currentOffer.offer.price >= 10000 && currentOffer.offer.price <= 50000 && housingPriceField.value === 'middle')
+    && ((currentOffer.offer.price < MEDIUM_PRICE && housingPriceField.value === 'low')
+    || (currentOffer.offer.price > HIGH_PRICE && housingPriceField.value === 'high')
+    || (currentOffer.offer.price >= MEDIUM_PRICE && currentOffer.offer.price <= HIGH_PRICE && housingPriceField.value === 'middle')
     || (housingPriceField.value === 'any'))
-    && (
-      (!wifiField.checked && !dishwasherField.checked && !parkingField.checked && !washerField.checked && !elevatorField.checked && !conditionerField.checked)
+    && ((!wifiField.checked && !dishwasherField.checked && !parkingField.checked && !washerField.checked && !elevatorField.checked && !conditionerField.checked)
     || ((currentOffer.offer.features.includes('elevator') && elevatorField.checked) || (!elevatorField.checked))
     && ((currentOffer.offer.features.includes('wifi') && wifiField.checked) || (!wifiField.checked))
     && ((currentOffer.offer.features.includes('dishwasher') && dishwasherField.checked) || (!dishwasherField.checked))

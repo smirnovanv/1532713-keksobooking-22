@@ -4,14 +4,12 @@ const main = document.querySelector('main');
 const successfulAdTemplate = document.querySelector('#success').content;
 const successfulAdMarkup = successfulAdTemplate.querySelector('.success');
 const mapCanvas = document.querySelector('.map__canvas');
-
 const errorAdTemplate = document.querySelector('#error').content;
 const errorAdMarkup = errorAdTemplate.querySelector('.error');
 
 const successfulAdWindow = successfulAdMarkup.cloneNode(true);
 const errorAdWindow = errorAdMarkup.cloneNode(true);
 
-//Открытие и закрытие окна об успешной отправке объявления
 const onSuccessfulAdWindowClick = () => {
   closeSuccessWindow();
 }
@@ -38,8 +36,6 @@ const closeSuccessWindow = () => {
   document.removeEventListener('click', onSuccessfulAdWindowClick);
   document.removeEventListener('keydown', onSuccessfulAdWindowEscKeydown);
 }
-
-// Открытие и закрытие окна об ошибки отправки объявления
 
 const onErrorAdWindowClick = () => {
   closeErrorAdWindow();

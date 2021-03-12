@@ -3,8 +3,17 @@ import {getMapLoadStatus} from './map.js';
 const mapFiltersForm = document.querySelector('.map__filters');
 const filterSelectFields = mapFiltersForm.querySelectorAll('select');
 const filterFeaturesField = mapFiltersForm.querySelector('fieldset');
-
-//Активируем фильтр
+const housingTypeField = mapFiltersForm.querySelector('#housing-type');
+const housingPriceField = mapFiltersForm.querySelector('#housing-price');
+const housingRoomsField = mapFiltersForm.querySelector('#housing-rooms');
+const housingGuestsField = mapFiltersForm.querySelector('#housing-guests');
+const housingFeaturesField = mapFiltersForm.querySelector('#housing-features');
+const wifiField = housingFeaturesField.querySelector('#filter-wifi');
+const dishwasherField = housingFeaturesField.querySelector('#filter-dishwasher');
+const parkingField = housingFeaturesField.querySelector('#filter-parking');
+const washerField = housingFeaturesField.querySelector('#filter-washer');
+const elevatorField = housingFeaturesField.querySelector('#filter-elevator');
+const conditionerField = housingFeaturesField.querySelector('#filter-conditioner');
 
 mapFiltersForm.classList.add('map__filters--disabled');
 filterSelectFields.forEach((currentFilterField) => {
@@ -21,20 +30,6 @@ const startFilter = () => {
     filterFeaturesField.removeAttribute('disabled');
   }
 }
-
-//Слушаем события
-
-const housingTypeField = mapFiltersForm.querySelector('#housing-type');
-const housingPriceField = mapFiltersForm.querySelector('#housing-price');
-const housingRoomsField = mapFiltersForm.querySelector('#housing-rooms');
-const housingGuestsField = mapFiltersForm.querySelector('#housing-guests');
-const housingFeaturesField = mapFiltersForm.querySelector('#housing-features');
-const wifiField = housingFeaturesField.querySelector('#filter-wifi');
-const dishwasherField = housingFeaturesField.querySelector('#filter-dishwasher');
-const parkingField = housingFeaturesField.querySelector('#filter-parking');
-const washerField = housingFeaturesField.querySelector('#filter-washer');
-const elevatorField = housingFeaturesField.querySelector('#filter-elevator');
-const conditionerField = housingFeaturesField.querySelector('#filter-conditioner');
 
 const onHousingTypeFieldChange = (cb) => {
   housingTypeField.addEventListener('change', () => {
