@@ -10,7 +10,7 @@ import './photo.js';
 import {getData} from './server.js';
 import {renderSimilarList} from './similar-list.js';
 import {onHousingTypeFieldChange, onRoomsNumberFieldChange, onGuestsNumberFieldChange, onPriceRangeFieldChange, onFeaturesFieldChange, mapFiltersForm} from './filter.js';
-import {onResetButtonClick, formReset, onOfferFormSumbmit} from './form.js';
+import {onResetButtonClick, formReset, onOfferFormSubmit} from './form.js';
 
 const RERENDER_DELAY = 500;
 
@@ -48,7 +48,7 @@ getData((offers) => {
     renderSimilarList(offers);
   });
 
-  onOfferFormSumbmit(() => {
+  onOfferFormSubmit(() => {
     mapFiltersForm.reset();
     renderSimilarList(offers);
   });

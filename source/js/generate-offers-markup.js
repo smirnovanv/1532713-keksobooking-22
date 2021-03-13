@@ -3,6 +3,19 @@ const offerCard = offerTemplate.querySelector('.popup');
 
 const generateOffersMarkup = (currentOffer) => {
   const newOffer = offerCard.cloneNode(true);
+  const currentOfferKeys = Object.keys(currentOffer.offer);
+  const currentAuthorKeys = Object.keys(currentOffer.author);
+  const featuresList = newOffer.querySelector('.popup__features');
+  const imagesList = newOffer.querySelector('.popup__photos');
+  const imagePattern = newOffer.querySelector('.popup__photo');
+  const popupTitle = newOffer.querySelector('.popup__title');
+  const popupAddress = newOffer.querySelector('.popup__text--address');
+  const popupPrice = newOffer.querySelector('.popup__text--price');
+  const popupType = newOffer.querySelector('.popup__type');
+  const popupCapacity = newOffer.querySelector('.popup__text--capacity');
+  const popupTime = newOffer.querySelector('.popup__text--time');
+  const popupDescription = newOffer.querySelector('.popup__description');
+  const popupAvatar = newOffer.querySelector('.popup__avatar');
 
   const showApartmentType = (currentApartment) => {
     switch (currentApartment.offer.type) {
@@ -46,16 +59,6 @@ const generateOffersMarkup = (currentOffer) => {
     return currentFeaturesList;
   }
 
-  const featuresList = newOffer.querySelector('.popup__features');
-  let newFeaturesList = featuresList.cloneNode(false);
-  if (currentOffer.offer.features.length === 0) {newFeaturesList.classList.add('visually-hidden')}
-
-  newFeaturesList.appendChild(createFeaturesList(currentOffer));
-
-  const imagesList = newOffer.querySelector('.popup__photos');
-  const imagePattern = newOffer.querySelector('.popup__photo');
-  let newImagesList = imagesList.cloneNode(false);
-  if (currentOffer.offer.photos.length === 0) {newImagesList.classList.add('visually-hidden')}
   const createImages = (apartment) => {
     let currentImagesList = document.createDocumentFragment();
 
@@ -66,18 +69,54 @@ const generateOffersMarkup = (currentOffer) => {
     }
     return currentImagesList;
   }
-  newImagesList.appendChild(createImages(currentOffer));
 
-  newOffer.querySelector('.popup__title').textContent = currentOffer.offer.title;
-  newOffer.querySelector('.popup__text--address').textContent = currentOffer.offer.address;
-  newOffer.querySelector('.popup__text--price').textContent = `${currentOffer.offer.price} ₽/ночь`;
-  newOffer.querySelector('.popup__type').textContent = showApartmentType(currentOffer);
-  newOffer.querySelector('.popup__text--capacity').textContent = `${currentOffer.offer.rooms} комнаты для ${currentOffer.offer.guests} гостей`;
-  newOffer.querySelector('.popup__text--time').textContent = `Заезд после ${currentOffer.offer.checkin}, выезд до ${currentOffer.offer.checkout}`;
+  const hideMarkupUnit = (unit) => {unit.classList.add('visually-hidden')}
+  const isOfferKey = (key) => {return currentOfferKeys.includes(key)}
+
+  let newFeaturesList = featuresList.cloneNode(false);
+  if (!isOfferKey('features') || currentOffer.offer.features.length === 0) {
+    hideMarkupUnit(newFeaturesList)
+  } else {
+    newFeaturesList.appendChild(createFeaturesList(currentOffer))
+  }
   newOffer.replaceChild(newFeaturesList, featuresList);
-  newOffer.querySelector('.popup__description').textContent = currentOffer.offer.description;
+
+  let newImagesList = imagesList.cloneNode(false);
+  if (!isOfferKey('photos') || currentOffer.offer.photos.length === 0) {
+    hideMarkupUnit(newImagesList)
+  } else {newImagesList.appendChild(createImages(currentOffer))}
   newOffer.replaceChild(newImagesList, imagesList);
-  newOffer.querySelector('.popup__avatar').src = currentOffer.author.avatar;
+
+  if (!isOfferKey('title') || currentOffer.offer.title === '') {hideMarkupUnit(popupTitle)
+  } else {popupTitle.textContent = currentOffer.offer.title}
+
+  if (!isOfferKey('address') || currentOffer.offer.address === '') {
+    hideMarkupUnit(popupAddress)
+  } else {popupAddress.textContent = currentOffer.offer.address}
+
+  if (!isOfferKey('price') || currentOffer.offer.price === '') {
+    hideMarkupUnit(popupPrice)
+  } else {popupPrice.textContent = `${currentOffer.offer.price} ₽/ночь`}
+
+  if (!isOfferKey('type') || currentOffer.offer.type === '') {
+    hideMarkupUnit(popupType)
+  } else {popupType.textContent = showApartmentType(currentOffer)}
+
+  if (!isOfferKey('rooms') || currentOffer.offer.rooms === '') {
+    hideMarkupUnit(popupCapacity)
+  } else {popupCapacity.textContent = `${currentOffer.offer.rooms} комнаты для ${currentOffer.offer.guests} гостей`}
+
+  if (!isOfferKey('checkin') || !currentOfferKeys.includes('checkout') || currentOffer.offer.checkin === '' || currentOffer.offer.checkout === '') {
+    hideMarkupUnit(popupTime)
+  } else {popupTime.textContent = `Заезд после ${currentOffer.offer.checkin}, выезд до ${currentOffer.offer.checkout}`}
+
+  if (!isOfferKey('description') || currentOffer.offer.description === '') {
+    hideMarkupUnit(popupDescription)
+  } else {popupDescription.textContent = currentOffer.offer.description}
+
+  if (!currentAuthorKeys.includes('avatar') || currentOffer.author.avatar === '') {
+    hideMarkupUnit(popupAvatar)
+  } else {popupAvatar.src = currentOffer.author.avatar}
 
   return newOffer;
 }

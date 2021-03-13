@@ -3,6 +3,10 @@ import {showSuccessWindow, showAdErrorWindow} from './modal-windows.js';
 import {avatarPreview, photosContainer} from './photo.js';
 
 const DEFAULT_AVATAR = 'img/muffin-grey.svg';
+const BUNGALOW_MINIMUM_PRICE = '0';
+const FLAT_MINIMUM_PRICE = '1000';
+const HOUSE_MINIMUM_PRICE = '5000';
+const PALACE_MINIMUM_PRICE = '10000';
 
 const yourOfferForm = document.querySelector('.ad-form');
 const yourOfferFormFields = yourOfferForm.querySelectorAll('fieldset');
@@ -45,18 +49,19 @@ mainPinMarker.on('moveend', transferCoordinates());
 
 typeField.addEventListener('change', () => {
   if (typeField.value === 'bungalow') {
-    priceField.setAttribute('min', 0);
-    priceField.placeholder = 0;}
+    priceField.setAttribute('min', BUNGALOW_MINIMUM_PRICE);
+    priceField.placeholder = BUNGALOW_MINIMUM_PRICE;}
   else if (typeField.value === 'flat') {
-    priceField.setAttribute('min', 1000);
-    priceField.placeholder = 1000;
+    priceField.setAttribute('min', FLAT_MINIMUM_PRICE);
+    priceField.placeholder = FLAT_MINIMUM_PRICE;
   }
   else if (typeField.value ==='house') {
-    priceField.setAttribute('min', 5000);
-    priceField.placeholder = 5000;
-  } else if (typeField.value === 'palace') {
-    priceField.setAttribute('min', 10000);
-    priceField.placeholder = 10000;
+    priceField.setAttribute('min', HOUSE_MINIMUM_PRICE);
+    priceField.placeholder = HOUSE_MINIMUM_PRICE;
+  }
+  else if (typeField.value === 'palace') {
+    priceField.setAttribute('min', PALACE_MINIMUM_PRICE);
+    priceField.placeholder = PALACE_MINIMUM_PRICE;
   }
 })
 
@@ -125,8 +130,8 @@ roomNumberField.addEventListener('change', () => {
 
 const formReset = () => {
   yourOfferForm.reset();
-  priceField.setAttribute('min', '1000');
-  priceField.setAttribute('placeholder', '1000');
+  priceField.setAttribute('min', FLAT_MINIMUM_PRICE);
+  priceField.setAttribute('placeholder', FLAT_MINIMUM_PRICE);
   capacityOptions.forEach((capacityOption) => capacityOption.removeAttribute('disabled'));
   capacityOptions.forEach((capacityOption) => capacityOption.removeAttribute('selected'));
   capacityOptions[2].setAttribute('selected', '');
@@ -140,7 +145,7 @@ const formReset = () => {
   addressField.value = `${DEFAULT_LAT}, ${DEFAULT_LNG}`;
 };
 
-const onOfferFormSumbmit = (cb) => {
+const onOfferFormSubmit = (cb) => {
   yourOfferForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -170,4 +175,4 @@ const onResetButtonClick = (cb) => {
   });
 }
 
-export {onResetButtonClick, formReset, onOfferFormSumbmit};
+export {onResetButtonClick, formReset, onOfferFormSubmit};

@@ -1,4 +1,6 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const APARTMENT_PREVIEW_HEIGHT = '70';
+const APARTMENT_PREVIEW_WIDTH = '70';
 
 const loadAvatarField = document.querySelector('#avatar');
 const avatarContainer = document.querySelector('.ad-form-header__preview');
@@ -37,8 +39,8 @@ loadImagesField.addEventListener('change', () => {
     const reader = new FileReader();
 
     const apartmentImagePreview = document.createElement('img');
-    apartmentImagePreview.setAttribute('width', 70);
-    apartmentImagePreview.setAttribute('height', 70);
+    apartmentImagePreview.setAttribute('width', APARTMENT_PREVIEW_HEIGHT);
+    apartmentImagePreview.setAttribute('height', APARTMENT_PREVIEW_WIDTH);
 
     reader.addEventListener('load', () => {
       apartmentImagePreview.src = reader.result;

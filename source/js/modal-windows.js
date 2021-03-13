@@ -23,7 +23,7 @@ const onSuccessfulAdWindowEscKeydown = (evt) => {
 
 const showSuccessWindow = () => {
   main.insertBefore(successfulAdWindow, main.childNodes[0]);
-  mapCanvas.style.zIndex = -1;
+  mapCanvas.style.zIndex = '-1';
 
   document.addEventListener('click', onSuccessfulAdWindowClick);
   document.addEventListener('keydown', onSuccessfulAdWindowEscKeydown)
@@ -31,7 +31,7 @@ const showSuccessWindow = () => {
 
 const closeSuccessWindow = () => {
   main.removeChild(successfulAdWindow);
-  mapCanvas.style.zIndex = 10;
+  mapCanvas.style.zIndex = '10';
 
   document.removeEventListener('click', onSuccessfulAdWindowClick);
   document.removeEventListener('keydown', onSuccessfulAdWindowEscKeydown);
@@ -50,7 +50,7 @@ const onErrorAdWindowEscKeydown = (evt) => {
 
 const showAdErrorWindow = () => {
   main.insertBefore(errorAdWindow, main.childNodes[0]);
-  mapCanvas.style.zIndex = -1;
+  mapCanvas.style.zIndex = '-1';
 
   document.addEventListener('click', onErrorAdWindowClick);
   document.addEventListener('keydown', onErrorAdWindowEscKeydown);
@@ -58,7 +58,7 @@ const showAdErrorWindow = () => {
 
 const closeErrorAdWindow = () => {
   main.removeChild(errorAdWindow);
-  mapCanvas.style.zIndex = 10;
+  mapCanvas.style.zIndex = '10';
 
   document.removeEventListener('click', onErrorAdWindowClick);
   document.removeEventListener('keydown', onErrorAdWindowEscKeydown);

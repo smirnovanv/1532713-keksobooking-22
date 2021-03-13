@@ -23,10 +23,7 @@ L.tileLayer(
 ).addTo(map);
 
 const getMapLoadStatus = () => {
-  if (loadStatus) {
-    return true;
-  }
-  return false;
+  return loadStatus;
 }
 
 const mainPinIcon = L.icon({
